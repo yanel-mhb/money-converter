@@ -13,7 +13,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const chars = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789azertyuiopqsdfghjklmwxcvbnазертыуиоп́сдфгхйклмщхцвбнАЗЕРТЫУИОПQСДФГХЙКЛМЩХЦВБН";
+const chars = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789azertyuiopqsdfghjklmwxcvbnазертыуиоп́сдфгхйклмщхцвбнАЗЕРТЫУИОПQСДФГХЙКЛМЩХЦВБНא ב ג ד ה ו ז ח ט י כ ך ל מ ם נ ן ס ע פ ף צ ץ ק ר ש תا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و يבּ כּ פּ שׁ שׂ וּ זּ טּ יּ ךּ כּ לּ מּ נּ סּ כֿآ أ إ ئ ء ؤ ة ى ٱ ٲ ٳ ٵ ﭐ ﭑ ﭒ ﭓ";
 const fontSize = 14;
 const columns = canvas.width / fontSize;
 const drops = Array(Math.floor(columns)).fill(1);
@@ -34,7 +34,7 @@ function drawMatrix() {
         }
         drops[i]++;
     }
-}
+} 
 
 // Lancer l'animation Matrix
 const matrixInterval = setInterval(drawMatrix, 25);
@@ -62,7 +62,7 @@ fetch('https://openexchangerates.org/api/currencies.json')
     loadRates(fromSelect.value);
   })
   .catch(() => {
-    resultEl.textContent = 'Erreur de chargement des devises';
+    resultEl.textContent = 'Error';
   });
 
 // Charger les taux en fonction de la devise de base
@@ -73,7 +73,7 @@ function loadRates(base) {
       rates = data.rates;
     })
     .catch(() => {
-      resultEl.textContent = 'Échec du chargement des taux';
+      resultEl.textContent = 'Failed to load rates';
     });
 }
 
@@ -88,12 +88,11 @@ btnConvert.addEventListener('click', () => {
   const from = fromSelect.value;
   const to = toSelect.value;
 
-  if (isNaN(amount) || amount <= 0) {
-    resultEl.textContent = 'AUCUNE VALEUR SAISIE';
+  if (isNaN(amount) || amount <= 0) {    resultEl.textContent = 'NO VALUE ENTERED';
     return;
   }
   if (!rates[to]) {
-    resultEl.textContent = 'Taux non disponible';
+    resultEl.textContent = 'Rate not available';
     return;
   }
 
